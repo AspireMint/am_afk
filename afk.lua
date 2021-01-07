@@ -161,6 +161,9 @@ minetest.register_globalstep(function(dtime)
 			local state = get_activity_state(player)
 			if state == activity_state.active then
 				mod.players[name].timer = 0
+				if is_afk(player) then
+					set_back(player)
+				end
 			elseif not mod.players[name].afk then
 				mod.players[name].timer = mod.players[name].timer + seconds
 				if mod.players[name].timer >= mod.config.afk_inactivity_time then
